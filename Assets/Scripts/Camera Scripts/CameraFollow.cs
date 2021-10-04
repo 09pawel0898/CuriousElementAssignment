@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Transform m_Target;
+    private float m_FollowingSpeed = 3.0f;
+    private Vector3 m_CameraOffset;
+
+    private void Awake()
     {
-        
+        m_Target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); // i am using build-in player tag
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        m_CameraOffset = transform.position - m_Target.position;
+    }
+
+    private void Update()
+    {
+        transform.position = Vector3.Slerp( transform.position,
+                                            new Vector3(m_Target.position.x, 0, m_Target.position.z) + m_CameraOffset,
+                                            Time.deltaTime * m_FollowingSpeed);
     }
 }
