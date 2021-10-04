@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    private Transform m_Target;
-    private float m_FollowingSpeed = 3.0f;
+    [SerializeField] [Range(2,5)] private float m_FollowingSpeed = 3.0f;
+    
     private Vector3 m_CameraOffset;
+    private Transform m_Target;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class CameraFollow : MonoBehaviour
     private void Update()
     {
         transform.position = Vector3.Slerp( transform.position,
-                                            new Vector3(m_Target.position.x, 0, m_Target.position.z) + m_CameraOffset,
+                                            new Vector3(m_Target.position.x, m_Target.position.y, m_Target.position.z) + m_CameraOffset,
                                             Time.deltaTime * m_FollowingSpeed);
     }
 }
