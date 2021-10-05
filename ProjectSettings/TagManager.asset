@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Blocking
   - NameInput
+  - TimeText
+  - FireExtinguisher
+  - Suit
+  - Helmet
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - Blocking
   - Player
   - World
-  - 
+  - Interactable
   - 
   - 
   - 
@@ -45,4 +49,7 @@ TagManager:
     locked: 0
   - name: GUI
     uniqueID: 2378306405
+    locked: 0
+  - name: 
+    uniqueID: 1195307391
     locked: 0

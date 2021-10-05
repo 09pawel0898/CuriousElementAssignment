@@ -13,6 +13,7 @@ public class GameplayController : MonoBehaviour
 
     public delegate void OnGameStartDelegate();
     public OnGameStartDelegate onGameStartDelegate;
+
     private AudioSource m_AudioSource;
     bool m_GameStarted = false;
 

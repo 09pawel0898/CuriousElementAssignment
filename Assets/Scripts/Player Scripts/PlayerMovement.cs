@@ -14,12 +14,15 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController m_CharacterController;
     private Animator m_Animator;
     private Transform m_Transform;
+    bool m_IsFullyEquiped;
 
     [SerializeField] [Range(1, 2)] private float m_MoveSpeed = 1f;
 
     private float m_CurrentSpeed;
     private float m_VerticalInput = 0f;
     private float m_HorizontalInput = 0f;
+
+    [SerializeField] private GameObject[] m_Equipment;
 
     private void Awake()
     {
@@ -68,34 +71,66 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleUserInput()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if(Input.GetMouseButtonDown(1) && !m_Animator.GetBool("Walk"))
         {
-            m_VerticalInput = 0.5f;
-            m_HorizontalInput = -0.5f;
-            m_FacingDirection = FacingDirection.Left;
+            if (m_IsFullyEquiped)
+                m_Animator.SetBool("Extinguish", true);
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if(Input.GetMouseButtonUp(1))
         {
-            m_VerticalInput = -0.5f;
-            m_HorizontalInput = 0.5f;
-            m_FacingDirection = FacingDirection.Right;
+            if (m_IsFullyEquiped)
+                m_Animator.SetBool("Extinguish", false);
         }
-        else if (Input.GetKey(KeyCode.UpArrow))
+
+        if (!m_Animator.GetBool("Extinguish"))
         {
-            m_HorizontalInput = m_VerticalInput = -0.5f;
-            m_FacingDirection = FacingDirection.Up;
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                m_VerticalInput = 0.5f;
+                m_HorizontalInput = -0.5f;
+                m_FacingDirection = FacingDirection.Left;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                m_VerticalInput = -0.5f;
+                m_HorizontalInput = 0.5f;
+                m_FacingDirection = FacingDirection.Right;
+            }
+            else if (Input.GetKey(KeyCode.UpArrow))
+            {
+                m_HorizontalInput = m_VerticalInput = -0.5f;
+                m_FacingDirection = FacingDirection.Up;
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                m_HorizontalInput = m_VerticalInput = 0.5f;
+                m_FacingDirection = FacingDirection.Down;
+            }
+            else
+            {
+                m_HorizontalInput = m_VerticalInput = 0.0f;
+                m_Animator.SetBool("Walk", false);
+                return;
+            }
+            m_Animator.SetBool("Walk", true);
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
+    }
+
+    public void EquipItem(int id)
+    {
+        switch(id)
         {
-            m_HorizontalInput = m_VerticalInput = 0.5f;
-            m_FacingDirection = FacingDirection.Down;
+            case 0:
+                
+                break;
+            case 1:
+                m_Equipment[1].SetActive(true);
+                break;
+            case 2:
+                m_Equipment[2].SetActive(true);
+                m_IsFullyEquiped = true;
+                break;
         }
-        else
-        {
-            m_HorizontalInput = m_VerticalInput = 0.0f;
-            m_Animator.SetBool("Walk", false);
-            return;
-        }
-        m_Animator.SetBool("Walk", true);
     }
 }

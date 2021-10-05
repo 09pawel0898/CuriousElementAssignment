@@ -35,9 +35,14 @@ public class GameController
     }
     public void EnableTimeCounting()
     {
-        m_TimeText = GameObject.FindGameObjectWithTag("TimeText").GetComponent<Text>();
+        m_TimeText = GameObject.FindWithTag("TimeText").GetComponent<Text>();
         m_TimeText.enabled = true;
         m_GameStartTime = Time.realtimeSinceStartup;
         m_CountingStarted = true;
+    }
+
+    public bool IsCountingStarted()
+    {
+        return m_CountingStarted;
     }
 }
