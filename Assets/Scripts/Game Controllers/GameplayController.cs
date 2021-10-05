@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 public class GameplayController : MonoBehaviour
 {
+    [Inject]
+    private GameController i_GameController;
+
     public static GameplayController Instance { get; private set; }
 
     public delegate void OnGameStartDelegate();
     public OnGameStartDelegate onGameStartDelegate;
     private AudioSource m_AudioSource;
+    bool m_GameStarted = false;
 
     public void StartTheGame()
     {
-        GameplayController.Instance.onGameStartDelegate?.Invoke();
+        i_GameController.Init();
+        onGameStartDelegate?.Invoke();
+        m_GameStarted = true;
     }
 
     private void Awake()
@@ -34,6 +42,10 @@ public class GameplayController : MonoBehaviour
 
     private void Update()
     {
+        if (m_GameStarted)
+        {
+            i_GameController.UpdateTimeCounter();
+        }
     }
     
     private void StartAnAllarm()
@@ -41,9 +53,10 @@ public class GameplayController : MonoBehaviour
         StartCoroutine(StartAnAllarm(UnityEngine.Random.Range(3, 6)));
     }
 
-    public IEnumerator StartAnAllarm(int secondsToStart)
+    private IEnumerator StartAnAllarm(int secondsToStart)
     {
         yield return new WaitForSeconds(secondsToStart);
         m_AudioSource.Play();
-    }
+        i_GameController.EnableTimeCounting();
+    }  
 }

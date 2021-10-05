@@ -1,10 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController
 {
+    private Text m_TimeText;
+    private float m_GameStartTime;
+    private bool m_CountingStarted = false;
+
     public GameController()
+    {}
+    
+    public void UpdateTimeCounter()
+    {
+        if(m_CountingStarted)
+            m_TimeText.text = "Time : " + Math.Round(Time.realtimeSinceStartup - m_GameStartTime,2).ToString();
+    }
+
+    public void Init()
     {
         InitGameStartDelegate();
     }
@@ -16,6 +31,13 @@ public class GameController
 
     private void EnablePlayerMovementScript()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().gameObject.SetActive(true);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+    }
+    public void EnableTimeCounting()
+    {
+        m_TimeText = GameObject.FindGameObjectWithTag("TimeText").GetComponent<Text>();
+        m_TimeText.enabled = true;
+        m_GameStartTime = Time.realtimeSinceStartup;
+        m_CountingStarted = true;
     }
 }
