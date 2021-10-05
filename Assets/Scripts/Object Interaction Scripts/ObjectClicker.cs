@@ -7,7 +7,6 @@ public class ObjectClicker : MonoBehaviour
 {
     [SerializeField] private GameObject[] m_CorrectOrder;
     [Inject] private GameController i_GameController;
-
     private int m_ItemsInEq = 0;
 
     private void Update()
@@ -19,10 +18,15 @@ public class ObjectClicker : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit, 100.0f, LayerMask.GetMask("Interactable")))
                 {
-                    if (hit.transform != null)
+                    if (hit.transform != null && IsItemInRange(hit.transform))
                         CheckIfClickedOnCorrectGameObject(hit.transform.gameObject);
                 }
         }
+    }
+
+    private bool IsItemInRange(Transform item)
+    {
+        return (Vector3.Distance(item.position, transform.position) < 1.2f) ? true : false;
     }
 
     private void CheckIfClickedOnCorrectGameObject(GameObject obj)
