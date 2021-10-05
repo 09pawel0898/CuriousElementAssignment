@@ -12,18 +12,16 @@ public class ObjectClicker : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0) && i_GameController.IsCountingStarted())
+        if(Input.GetMouseButtonDown(0) )
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if(Physics.Raycast(ray,out hit, 100.0f,LayerMask.GetMask("Interactable")))
-            {
-                if(hit.transform != null)
+                if (Physics.Raycast(ray, out hit, 100.0f, LayerMask.GetMask("Interactable")))
                 {
-                    CheckIfClickedOnCorrectGameObject(hit.transform.gameObject);
-                }    
-            }
+                    if (hit.transform != null)
+                        CheckIfClickedOnCorrectGameObject(hit.transform.gameObject);
+                }
         }
     }
 
@@ -31,13 +29,15 @@ public class ObjectClicker : MonoBehaviour
     {
         if(obj.tag == m_CorrectOrder[m_ItemsInEq].tag)
         {
-            gameObject.GetComponent<PlayerMovement>().EquipItem(m_ItemsInEq++);
-            obj.SetActive(false);
+            if (i_GameController.IsCountingStarted())
+            {
+                gameObject.GetComponent<PlayerMovement>().EquipItem(m_ItemsInEq++);
+                obj.SetActive(false);
+            }
+            else
+                MessageAnnouncer.Instance.ShowMessage("Nie ma potrzeby sie jeszcze ubierac");
         }
         else
-        {
-            // wrong order
-            Debug.Log("Wrong order");
-        }
+            MessageAnnouncer.Instance.ShowMessage("Ubierasz sie w zlej kolejnosci");
     }
 }

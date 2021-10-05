@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private GameObject[] m_Equipment;
 
+    [SerializeField] private SkinnedMeshRenderer m_Body;
+    [SerializeField] private Material m_StripesMat, m_JacketMat, m_PantsMat;
     private void Awake()
     {
         m_Transform = GetComponent<Transform>();
@@ -122,7 +124,11 @@ public class PlayerMovement : MonoBehaviour
         switch(id)
         {
             case 0:
-                
+                var materials = m_Body.materials;
+                materials[5] = m_StripesMat;
+                materials[3] = m_JacketMat;
+                materials[2] = m_PantsMat;
+                m_Body.materials = materials;
                 break;
             case 1:
                 m_Equipment[1].SetActive(true);
