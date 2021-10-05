@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private float m_HorizontalInput = 0f;
 
     [SerializeField] private GameObject[] m_Equipment;
+    [SerializeField] private GameObject m_Foam;
 
     [SerializeField] private SkinnedMeshRenderer m_Body;
     [SerializeField] private Material m_StripesMat, m_JacketMat, m_PantsMat;
@@ -76,12 +77,18 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetMouseButtonDown(1) && !m_Animator.GetBool("Walk"))
         {
             if (m_IsFullyEquiped)
+            {
                 m_Animator.SetBool("Extinguish", true);
+                m_Foam.SetActive(true);
+            }
         }
         else if(Input.GetMouseButtonUp(1))
         {
             if (m_IsFullyEquiped)
+            {
                 m_Animator.SetBool("Extinguish", false);
+                m_Foam.SetActive(false);
+            }
         }
 
         if (!m_Animator.GetBool("Extinguish"))

@@ -8,14 +8,14 @@ public class GameController
 {
     private Text m_TimeText;
     private float m_GameStartTime;
-    private bool m_CountingStarted = false;
+    private bool m_CountingActive = false;
 
     public GameController()
     {}
     
     public void UpdateTimeCounter()
     {
-        if(m_CountingStarted)
+        if(m_CountingActive)
             m_TimeText.text = "Time : " + Math.Round(Time.realtimeSinceStartup - m_GameStartTime,2).ToString();
     }
 
@@ -38,11 +38,11 @@ public class GameController
         m_TimeText = GameObject.FindWithTag("TimeText").GetComponent<Text>();
         m_TimeText.enabled = true;
         m_GameStartTime = Time.realtimeSinceStartup;
-        m_CountingStarted = true;
+        m_CountingActive = true;
     }
 
     public bool IsCountingStarted()
     {
-        return m_CountingStarted;
+        return m_CountingActive;
     }
 }
