@@ -9,6 +9,7 @@ public class GameController
     private Text m_TimeText;
     private float m_GameStartTime;
     private bool m_CountingActive = false;
+    public bool FireExtinguished { get; private set; }
 
     public GameController()
     {}
@@ -53,8 +54,8 @@ public class GameController
         m_CountingActive = false;
         string time = m_TimeText.text.Substring(6);
         MessageAnnouncer.Instance.ShowMessage("Sukces! Twoj koncowy czas to : " + time,false);
-        Time.timeScale = 0.0f;
         m_TimeText.enabled = false;
+        FireExtinguished = true;
     }
 
     public bool IsCountingStarted()

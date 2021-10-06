@@ -45,9 +45,9 @@ public class GameplayController : MonoBehaviour
     private void Update()
     {
         if (m_GameStarted)
-        {
             i_GameController.UpdateTimeCounter();
-        }
+        if(i_GameController.FireExtinguished)
+            StopTheGame();
     }
     
     private void StartAnAllarm()
@@ -62,4 +62,10 @@ public class GameplayController : MonoBehaviour
         i_GameController.EnableTimeCounting();
         m_Barrel.ActivateFireSystem();
     }  
+
+    private void StopTheGame()
+    {
+        m_AudioSource.Stop();
+        Time.timeScale = 0.0f;
+    }
 }

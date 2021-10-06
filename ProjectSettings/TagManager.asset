@@ -10,6 +10,7 @@ TagManager:
   - FireExtinguisher
   - Suit
   - Helmet
+  - Barrel
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Player
   - World
   - Interactable
-  - 
+  - Extinguishable
   - 
   - 
   - 

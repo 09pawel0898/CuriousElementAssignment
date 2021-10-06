@@ -6,9 +6,6 @@ using Zenject;
 
 public class MainMenuController : MonoBehaviour
 {
-    [Inject]
-    private GameController i_GameController;
-
     [SerializeField] private InputField m_NameInput;
 
     private void Awake()
