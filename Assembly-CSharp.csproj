@@ -53,17 +53,18 @@
     <UnityVersion>2020.3.19f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\GUI Scripts\MessageAnnouncer.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Zenject Installers\GameControllerInstaller.cs" />
     <Compile Include="Assets\Scripts\Game Controllers\MainMenuController.cs" />
     <Compile Include="Assets\Fonts\Script\scriptTexttest.cs" />
+    <Compile Include="Assets\Scripts\Player Scripts\ExtinguishingScript.cs" />
     <Compile Include="Assets\Scripts\Game Controllers\GameplayController.cs" />
     <Compile Include="Assets\Scripts\Game Controllers\GameController.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Camera Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Object Interaction Scripts\ObjectClicker.cs" />
-    <Compile Include="Assets\Scripts\GUI Scripts\MessageAnnouncer.cs" />
-    <Compile Include="Assets\Scripts\Player Scripts\ExtinguishingScript.cs" />
+    <Compile Include="Assets\Scripts\Object Interaction Scripts\BarrelScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\Documentation\JazzCreateAltKeys_BubbleFont.txt" />

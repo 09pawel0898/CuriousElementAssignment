@@ -39,9 +39,9 @@ public class ObjectClicker : MonoBehaviour
                 obj.SetActive(false);
             }
             else
-                MessageAnnouncer.Instance.ShowMessage("Nie ma potrzeby sie jeszcze ubierac");
+                MessageAnnouncer.Instance.ShowMessage("Nie ma potrzeby sie jeszcze ubierac",true);
         }
         else
-            MessageAnnouncer.Instance.ShowMessage("Ubierasz sie w zlej kolejnosci");
+            MessageAnnouncer.Instance.ShowMessage("Ubierasz sie w zlej kolejnosci",true);
     }
 }

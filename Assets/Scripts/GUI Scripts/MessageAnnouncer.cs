@@ -15,10 +15,11 @@ public class MessageAnnouncer : MonoBehaviour
         m_Text = gameObject.GetComponent<Text>();
     }
 
-    public void ShowMessage(string message)
+    public void ShowMessage(string message, bool dissapear)
     {
         m_Text.text = message;
-        StartCoroutine(DeleteMessageAfterFewSeconds());
+        if(dissapear)
+            StartCoroutine(DeleteMessageAfterFewSeconds());
     }
 
     private IEnumerator DeleteMessageAfterFewSeconds()

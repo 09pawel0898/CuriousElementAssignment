@@ -16,7 +16,7 @@ public class GameplayController : MonoBehaviour
 
     private AudioSource m_AudioSource;
     bool m_GameStarted = false;
-    [SerializeField] private GameObject m_BarrelFireSystem;
+    [SerializeField] private BarrelScript m_Barrel;
 
     public void StartTheGame()
     {
@@ -60,6 +60,6 @@ public class GameplayController : MonoBehaviour
         yield return new WaitForSeconds(secondsToStart);
         m_AudioSource.Play();
         i_GameController.EnableTimeCounting();
-        m_BarrelFireSystem.SetActive(true);
+        m_Barrel.ActivateFireSystem();
     }  
 }

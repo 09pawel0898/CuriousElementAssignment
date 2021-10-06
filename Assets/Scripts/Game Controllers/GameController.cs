@@ -16,7 +16,7 @@ public class GameController
     public void UpdateTimeCounter()
     {
         if(m_CountingActive)
-            m_TimeText.text = "Time : " + Math.Round(Time.realtimeSinceStartup - m_GameStartTime,2).ToString();
+            m_TimeText.text = "Czas : " + Math.Round(Time.realtimeSinceStartup - m_GameStartTime,2).ToString();
     }
 
     public void Init()
@@ -39,6 +39,16 @@ public class GameController
         m_TimeText.enabled = true;
         m_GameStartTime = Time.realtimeSinceStartup;
         m_CountingActive = true;
+    }
+
+    public void StopCountingAndShowFinalTime()
+    {
+        m_CountingActive = false;
+        string time = m_TimeText.text.Substring(6);
+        MessageAnnouncer.Instance.ShowMessage("Twoj koncowy czas to : " + time,false);
+
+        m_TimeText.enabled = false;
+        Time.timeScale = 0.0f;
     }
 
     public bool IsCountingStarted()
