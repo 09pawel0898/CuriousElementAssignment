@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private SkinnedMeshRenderer m_Body;
     [SerializeField] private Material m_StripesMat, m_JacketMat, m_PantsMat;
+
     private void Awake()
     {
         m_Transform = GetComponent<Transform>();
