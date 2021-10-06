@@ -33,6 +33,12 @@ public class GameController
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
     }
+
+    private void DisablePlayerMovementScript()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+    }
+
     public void EnableTimeCounting()
     {
         m_TimeText = GameObject.FindWithTag("TimeText").GetComponent<Text>();
@@ -43,12 +49,12 @@ public class GameController
 
     public void StopCountingAndShowFinalTime()
     {
+        DisablePlayerMovementScript();
         m_CountingActive = false;
         string time = m_TimeText.text.Substring(6);
-        MessageAnnouncer.Instance.ShowMessage("Twoj koncowy czas to : " + time,false);
-
-        m_TimeText.enabled = false;
+        MessageAnnouncer.Instance.ShowMessage("Sukces! Twoj koncowy czas to : " + time,false);
         Time.timeScale = 0.0f;
+        m_TimeText.enabled = false;
     }
 
     public bool IsCountingStarted()
