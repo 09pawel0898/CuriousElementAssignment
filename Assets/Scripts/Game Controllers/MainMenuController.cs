@@ -9,12 +9,10 @@ public class MainMenuController : MonoBehaviour
     [Inject]
     private GameController i_GameController;
 
-    private InputField m_NameInput;
+    [SerializeField] private InputField m_NameInput;
 
     private void Awake()
-    {
-        m_NameInput = GameObject.FindWithTag("NameInput").GetComponent<InputField>();
-    }
+    {}
 
     public void StartTheGame()
     {
